@@ -33,7 +33,7 @@ jobs:
           latest_num: 5
   build_and_push:
     runs-on: ubuntu-latest
-    needs: [tag_and_release]
+    needs: [get-mlflow-versions]
     strategy:
       matrix:
         mlflow-versions:  ${{ steps.get-mlflow-versions.outputs.mlflow-versions }}

@@ -1,4 +1,4 @@
-name: 'Get matrix of pypi versions for package'
+name: 'gha-pypi-versions'
 author: Martin Højland Hansen
 description: 'Generate a matrix of available versions of package on pypi'
 branding:
