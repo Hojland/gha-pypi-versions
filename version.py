@@ -12,4 +12,4 @@ def versions(package_name: str, latest_num: int):
 
 if __name__ == "__main__":
     vers = versions(str(sys.argv[1]), int(sys.argv[2]))
-    print(f"::set-output name=versions::${vers}")
+    print(f"::set-output name=versions::{vers}")
