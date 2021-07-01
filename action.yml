@@ -20,5 +20,7 @@ runs:
   steps:
     - run: python -m pip install requests==2.25.1
       shell: bash
+    - run: echo "${{ inputs.pkg_name }}"
+      shell: bash
     - run: python ${{ github.action_path }}/version.py ${{ inputs.pkg_name }} ${{ github.latest_num }}
       shell: bash
