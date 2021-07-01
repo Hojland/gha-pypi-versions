@@ -91,3 +91,6 @@ jobs:
         with:
           pkg_name: mlflow
           latest_num: 5
+      - name: test outputs
+        run: |
+          echo ${{ steps.mlflow-version.outputs.versions }}
