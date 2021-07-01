@@ -50,18 +50,6 @@ jobs:
       - name: "Github: Create test release"
         uses: ncipollo/release-action@v1
         id: test-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: test
-          release_name: Release ${{ steps.version.outputs.new_version }}
-          draft: false
-          prerelease: false
-          body: ${{ steps.changelog.outputs.changelog }}
-
-      - name: "Github: Create release"
-        uses: actions/create-release@v1
-        id: release
         with:
           tag: ${{ steps.version.outputs.new_tag }}
           name: Release test
@@ -70,6 +58,18 @@ jobs:
           replacesArtifacts: true
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Github: Create release"
+        uses: actions/create-release@v1
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: test
+          release_name: Release ${{ steps.version.outputs.new_version }}
+          draft: false
+          prerelease: false
+          body: ${{ steps.changelog.outputs.changelog }}
 
   test:
     runs-on: ubuntu-latest
