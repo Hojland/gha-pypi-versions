@@ -11,5 +11,7 @@ def versions(package_name: str, latest_num: int):
     return versions
 
 if __name__ == "__main__":
+    print(f"::debug :: Getting versions")
     vers = versions(str(sys.argv[1]), int(sys.argv[2]))
+    print(f"::debug :: Got versions with length {len(vers)}")
     print(f"::set-output name=versions::{vers}")
