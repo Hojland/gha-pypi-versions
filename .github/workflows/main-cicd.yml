@@ -49,7 +49,7 @@ jobs:
 
       - name: "Github: Create test release"
         uses: actions/create-release@v1
-        id: release
+        id: test-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
