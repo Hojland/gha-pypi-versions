@@ -12,5 +12,6 @@ def versions(package_name: str, latest_num: int):
     return versions
 
 if __name__ == "__main__":
+    print(sys.argv[1])
     vers = versions(str(sys.argv[1]), int(sys.argv[2]))
     print(f"::set-output name=versions::${vers}")
