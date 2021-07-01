@@ -62,8 +62,6 @@ jobs:
       - name: "Github: Create release"
         uses: actions/create-release@v1
         id: release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: ${{ steps.version.outputs.new_tag }}
           name: Release test
@@ -71,6 +69,7 @@ jobs:
           prerelease: false
           replacesArtifacts: true
           body: ${{ steps.changelog.outputs.changelog }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   test:
     runs-on: ubuntu-latest
