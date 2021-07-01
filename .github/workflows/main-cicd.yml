@@ -47,6 +47,14 @@ jobs:
           git tag -m "$Tagged new version: ${{ steps.version.outputs.new_version }}" -fa ${{ steps.version.outputs.new_tag }}
           git push --tags
 
+      - name: "Github: Remove old test release"
+        uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true 
+          tag_name: test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: "Github: Create test release"
         uses: ncipollo/release-action@v1
         id: test-release
