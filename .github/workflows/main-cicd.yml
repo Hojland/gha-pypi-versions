@@ -58,3 +58,15 @@ jobs:
           draft: false
           prerelease: false
           body: ${{ steps.changelog.outputs.changelog }}
+  test:
+    name: get-mlflow-versions
+    runs-on: ubuntu-latest
+    outputs:
+      mlflow-versions: ${{ steps.mlflow-version.outputs.versions }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hojland/gha-pypi-versions@${{ steps.version.outputs.new_tag }}
+        id: mlflow-version
+        with:
+          pkg_name: mlflow
+          latest_num: 5
