@@ -15,6 +15,11 @@ inputs:
     default: 5
     required: true
 
+outputs:
+  versions:
+    description: "The pypi package index versions"
+    value: ${{ steps.run.outputs.versions }}
+  
 runs:
   using: "composite"
   steps:
@@ -22,3 +27,4 @@ runs:
       shell: bash
     - run: python ${{ github.action_path }}/version.py ${{ inputs.pkg_name }} ${{ inputs.latest_num }}
       shell: bash
+      id: run
