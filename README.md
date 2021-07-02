@@ -26,7 +26,7 @@ jobs:
       mlflow-versions: ${{ steps.mlflow-version.outputs.versions }}
     steps:
       - uses: actions/checkout@v2
-      - uses: hojland/gha-pypi-versions
+      - uses: hojland/gha-pypi-versions@v0.0.20
         id: mlflow-version
         with:
           pkg_name: mlflow
@@ -36,7 +36,7 @@ jobs:
     needs: [get-mlflow-versions]
     strategy:
       matrix:
-        mlflow-versions:  ${{ steps.get-mlflow-versions.outputs.mlflow-versions }}
+        mlflow-version: ${{ fromJson(needs.get-mlflow-versions.outputs.mlflow-versions) }}
     steps:
       - uses: actions/checkout@v2
 ```
