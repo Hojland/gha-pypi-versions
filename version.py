@@ -1,13 +1,19 @@
 import sys
 import requests
-from distutils.version import StrictVersion
+import jmespath
+import operator
 
 def versions(package_name: str, latest_num: int):
     url = f"https://pypi.org/pypi/{package_name}/json"
     data = requests.get(url).json()
     versions = list(data["releases"].keys())
+    upload_times = list(data["releases"].values())
+    upload_times = jmespath.search("[*][*].upload_time", upload_times)
+    upload_times = [max(upload_time) for upload_time in upload_times]
+    versions = dict(zip(versions, upload_times))
     if len(versions) > latest_num:
-        versions = versions[-latest_num:]
+        versions = dict(sorted(versions.items(), key=operator.itemgetter(1), reverse=True)[:5])
+    versions = list(versions.keys())
     return versions
 
 if __name__ == "__main__":
